@@ -1,0 +1,28 @@
+<!-- guest_browse_items.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse Items</title>
+</head>
+<body>
+    <h1>Browse Items</h1>
+    <form method="get">
+        {{ item_filter_form.as_p }}
+        <input type="submit" value="Filter">
+    </form>
+
+    <ul>
+        {% for item in items %}
+            <li>
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.description }}</p>
+                <p>Price: ${{ item.price }}</p>
+                <!-- Add more item information as needed -->
+            </li>
+        {% empty %}
+            <li>No items found.</li>
+        {% endfor %}
+    </ul>
+	<a href="{% url 'home' %}">Go back to Home</a> <!-- Add this line for the button -->
+</body>
+</html>

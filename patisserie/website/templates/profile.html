@@ -1,0 +1,23 @@
+<!-- profile.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <h1>Welcome, {{ user.username }}!</h1>
+	<a href="{% url 'browse_items' %}">Browse Items</a>
+    <p>Email: {{ user.email }}</p>
+	{% if user.is_staff %}
+    <a href="{% url 'add_item' %}">Add Item</a>
+{% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <input type="submit" value="Update Profile">
+    </form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- login.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post" action="{% url 'login' %}"> <!-- Update action attribute -->
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login">
+    </form>
+	<a href="{% url 'register' %}">Register</a>
+</body>
+</html>
