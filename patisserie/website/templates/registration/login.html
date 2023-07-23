@@ -16,12 +16,10 @@
             color: #b35c2d;
         }
 
-        /* Center the form */
         form {
             text-align: center;
         }
 
-        /* Style the form inputs */
         input[type="text"],
         input[type="password"] {
             padding: 5px;
@@ -31,7 +29,6 @@
             border-radius: 5px;
         }
 
-        /* Style the form submit button */
         input[type="submit"] {
             background-color: #b35c2d;
             color: #ffffff;
@@ -42,17 +39,14 @@
             cursor: pointer;
         }
 
-        /* Style the form submit button on hover */
         input[type="submit"]:hover {
             background-color: #904727;
         }
 
-        /* Style the form submit button when clicked */
         input[type="submit"]:active {
             background-color: #4e2414;
         }
 
-        /* Center the "Register" link */
         a {
             display: block;
             text-align: center;
@@ -64,7 +58,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form method="post" action="{% url 'login' %}"> <!-- Update action attribute -->
+    <form method="post" action="{% url 'login' %}"> 
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Login">
