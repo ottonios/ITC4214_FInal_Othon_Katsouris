@@ -21,7 +21,7 @@ def register(request):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
-            return redirect('profile')  
+            return redirect('login')  
     else:
         user_form = UserRegistrationForm()
         profile_form = UserProfileForm()
