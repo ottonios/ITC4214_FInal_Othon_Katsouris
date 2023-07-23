@@ -3,12 +3,11 @@
 <head>
     <title>Cart Page</title>
     <style>
-        /* CSS styles for the header and footer */
         body {
             margin: 0;
             padding: 0;
-            position: relative; /* Set the body to relative position to accommodate the fixed footer */
-            min-height: 100vh; /* Set minimum height to 100% of viewport height */
+            position: relative; 
+            min-height: 100vh; 
         }
 
         header {
@@ -33,7 +32,6 @@
             font-family: "Arial", sans-serif;
         }
 
-        /* Center the title */
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -41,7 +39,6 @@
             color: #b35c2d;
         }
 
-        /* Style the list items containing the cart items */
         ul {
             list-style: none;
             padding: 0;
@@ -61,7 +58,6 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        /* Position the "Go back to browse page" link in the center */
         .back-to-browse {
             display: block;
             margin: 20px auto;
@@ -70,7 +66,6 @@
             color: #b35c2d;
         }
 
-        /* Style the "Remove from cart all products" button */
         .remove-from-cart-button {
             background-color: #b35c2d;
             color: #ffffff;
@@ -85,12 +80,10 @@
             margin-top: 20px;
         }
 
-        /* Style the "Remove from cart all products" button on hover */
         .remove-from-cart-button:hover {
             background-color: #904727;
         }
 
-        /* Style the "Remove from cart all products" button when clicked */
         .remove-from-cart-button:active {
             background-color: #4e2414;
         }
@@ -103,9 +96,7 @@
 </head>
 <body>
     <header>
-        <!-- Header content, e.g., logo, navigation menu, etc. -->
         <h1>Cart</h1>
-        <!-- Add any header content you want here -->
     </header>
 
     <ul>
@@ -117,7 +108,7 @@
             </li>
         {% endfor %}
     </ul>
-     <p class="total-price">Total Price: ${{ total_price }}</p> <!-- Center the total price -->
+     <p class="total-price">Total Price: ${{ total_price }}</p> 
     <a href="{% url 'browse_items' %}" class="back-to-browse">Go back to browse page</a>
     <form method="post" action="{% url 'remove_all_from_cart' %}">
         {% csrf_token %}
