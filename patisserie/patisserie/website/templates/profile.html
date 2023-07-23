@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile Page</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f9f3ee;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #b35c2d;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .browse-items-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            text-decoration: none;
+        }
+
+        .add-item-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            text-decoration: none;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form input[type="submit"] {
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #904727;
+        }
+
+        form input[type="submit"]:active {
+            background-color: #4e2414;
+        }
+
+        /* Center the email */
+        .email {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+		.logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #904727;
+        }
+
+        .logout-button:active {
+            background-color: #4e2414;
+        }
+		.go-browse-button {
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            /* Center the button and adjust the size */
+            display: block;
+            margin: 20px auto;
+            width: 160px;
+            text-align: center;
+        }
+
+        .go-browse-button:hover {
+            background-color: #904727;
+        }
+
+        .go-browse-button:active {
+            background-color: #4e2414;
+        }
+    </style>
+</head>
+<body>
+    <header>
+       <h1 class="header-name">The Patisserie Website</h1>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Log Out</button>
+        </form>
+    </header>
+
+    <h1>User Profile</h1>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <div style="text-align: center;"> 
+        <p>Email: {{ user.email }}</p>
+        {% if user.userprofile.profile_picture %}
+            <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+        {% else %}
+            <p>No profile picture uploaded.</p>
+        {% endif %}
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+        <input type="submit" value="Update Profile">
+    </form>
+    <div style="text-align: center;"> 
+        <a href="{% url 'browse_items' %}" class="go-browse-button">Go Browse Items</a>
+    </div>
+</body>
+</html>

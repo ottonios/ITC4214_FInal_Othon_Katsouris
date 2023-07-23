@@ -1,0 +1,5 @@
+<!-- remove_all_from_cart.html -->
+<form action="{% url 'remove_all_from_cart' %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Remove All Products from Cart">
+</form>

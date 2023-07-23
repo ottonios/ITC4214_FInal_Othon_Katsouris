@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Browse Items Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative; 
+            min-height: 100vh; 
+        }
+
+        header {
+            background-color: #b35c2d;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            font-family: "Arial", sans-serif;
+        }
+
+        .header-name {
+            font-family: "Arial", sans-serif;
+            font-size: 24px;
+            color: #FFFF00; 
+            margin-bottom: 10px; 
+        }
+
+        footer {
+            background-color: #b35c2d;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-family: "Arial", sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            font-family: "Arial", sans-serif;
+            color: #b35c2d;
+        }
+
+        form {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        li {
+            width: 300px;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f3ee;
+            border: 1px solid #b35c2d;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+        }
+
+        .top-right {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: "Arial", sans-serif;
+            color: #ffffff;
+        }
+
+        .add-to-cart-button {
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #904727;
+        }
+
+        .add-to-cart-button:active {
+            background-color: #4e2414;
+        }
+
+        .view-cart {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            font-family: "Arial", sans-serif;
+            color: #b35c2d;
+        }
+
+        .filter-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            margin: 20px; 
+        }
+
+        .filter-form label {
+            font-family: "Arial", sans-serif;
+            color: #b35c2d;
+            margin-bottom: 5px; 
+        }
+
+        .filter-form select {
+            font-family: "Arial", sans-serif;
+            color: #b35c2d;
+            padding: 5px 10px;
+            border: 1px solid #b35c2d;
+            border-radius: 5px;
+            width: 100%; 
+        }
+
+        .filter-form input[type="submit"] {
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; 
+            width: 100%; 
+        }
+
+        .filter-form input[type="submit"]:hover {
+            background-color: #904727;
+        }
+
+        .filter-form input[type="submit"]:active {
+            background-color: #4e2414;
+        }
+		.logout-button {
+            position: absolute;
+            top: 20px;
+            right: 100px; /* Adjust the right distance to make space for the new buttons */
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #904727;
+        }
+
+        .logout-button:active {
+            background-color: #4e2414;
+        }
+
+        /* Style the "Go back to Home" button */
+        .go-home-button {
+            position: absolute;
+            top: -10px;
+            right: 220px; /* Adjust the right distance to make space for the new buttons */
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .go-home-button:hover {
+            background-color: #904727;
+        }
+
+        .go-home-button:active {
+            background-color: #4e2414;
+        }
+
+        /* Style the "Go to Profile" button */
+        .go-profile-button {
+            position: absolute;
+            top: 20px;
+            right: 340px; /* Adjust the right distance to make space for the new buttons */
+            background-color: #b35c2d;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .go-profile-button:hover {
+            background-color: #904727;
+        }
+
+        .go-profile-button:active {
+            background-color: #4e2414;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-right">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Log Out</button>
+            </form>
+            <a href="{% url 'home' %}" class="go-home-button">Go back to Home</a>
+            <a href="{% url 'profile' %}" class="go-profile-button">Go to Profile</a>
+        </div>
+        <h1 class="header-name">The Patisserie Website</h1>
+    </header>
+
+
+    <h1>Patisserie E-shop</h1>
+    <form method="get" class="filter-form">
+        {{ item_filter_form.as_p }}
+        <input type="submit" value="Filter">
+        <a href="{% url 'view_cart' %}" class="view-cart">View Cart</a>
+    </form>
+    <ul>
+        {% for item in items %}
+            <li>
+                <h3>{{ item.name }}</h3>
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" width="200">
+                <p>{{ item.description }}</p>
+                <p>Price: ${{ item.price }}</p>
+                <form method="post" action="{% url 'add_to_cart' item.pk %}">
+                    {% csrf_token %}
+                    <button class="add-to-cart-button" type="submit">Add to Cart</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>No items found.</li>
+        {% endfor %}
+    </ul>
+    <footer>
+        <p>Contact us: patisserie@gmail123.com | Telephone Number: 9123289423</p>
+		<p>Adress: somewhere street somewhere avenue</p>
+    </footer>
+</body>
+</html>
